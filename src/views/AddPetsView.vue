@@ -1,4 +1,42 @@
-<script setup></script>
+<script setup>
+import { onMounted, ref } from 'vue';
+import { RouterLink, useRouter } from 'vue-router';
+
+
+const novoPet =ref({
+  nome:'',
+  especie:'',
+  tutorId:'',
+})
+
+const router = useRouter();
+//aqui esotu declarando api que ira retornar a lista de pets
+//sera responsavel por cadastrar novos pets
+
+const API_URL='http://localhost:3000'
+
+const tutores = ref({})
+
+async function carregarTutores(){
+  const resposta = await fetch(`${API_URL}/tutores`);
+  console.log('load tutores', tutores);
+  tutores.value = await resposta.json();
+}
+
+async function salvarPet() {
+ await fetch(`${API_URL}/pets`,{
+  method:'POST',
+  header:{
+    'Content-type':'application/json',
+  },
+  body:JSON.stringify(novoPet.value),
+
+});
+router.push('/pets');
+}
+
+onMounted(carregarTutores);
+</script>
 
 <template>
   <div>
@@ -13,5 +51,43 @@
     >
       Adicionar Pet
     </RouterLink>
+    <p v-if="!carregarTutores">Carregando tutores...</p>
+    <div v-else>
+    <p v-if="erro" class="alert alert-danger" role="alert">
+    {{ erro }}
+    </p>
+    </div>
+    <form @submit.prevent="salvarPet">
+
+      <div class="col-md-6">
+      <label for="nome" class="form-label"> nome do pet</label>
+      <input type="text" id="nome" v-model="novoPet.nome" class="form-control" required>
+      </div>
+
+       <div class="col-md-6">
+      <label for="especie" class="form-label"> especie </label>
+      <select  id="especie"
+      v-model="novoPet.especie"
+      class="form-select"
+      required>
+   <option value="" disabled> selecionar a especie</option>
+   <option value="1">Gato</option>
+   <option value="2">Cachorro</option>
+      </select>
+      </div>
+
+ <div class="col-md-6">
+      <label for="tutor" class="form-label"> Tutor </label>
+      <select  id="tutor"
+      v-model="novoPet.tutorId"
+      class="form-select"
+      required>
+   <option value="" disabled> selecionar o tutor</option>
+   <option  v-for="tutor in tutores" :key="tutor.id" :value="tutor.id">{{ tutor.nome }}</option>
+
+      </select>
+      </div>
+
+    </form>
   </div>
 </template>
