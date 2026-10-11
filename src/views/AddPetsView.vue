@@ -71,8 +71,8 @@ onMounted(carregarTutores);
       class="form-select"
       required>
    <option value="" disabled> selecionar a especie</option>
-   <option value="1">Gato</option>
-   <option value="2">Cachorro</option>
+   <option value="Gato">Gato</option>
+   <option value="Cachorro">Cachorro</option>
       </select>
       </div>
 
@@ -87,7 +87,7 @@ onMounted(carregarTutores);
 
       </select>
       </div>
-
+  <button type="submit" class="btn btn-secondary"> salvar</button>
     </form>
   </div>
 </template>
