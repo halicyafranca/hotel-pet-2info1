@@ -10,7 +10,7 @@ const novoPet =ref({
 })
 
 const router = useRouter();
-//aqui esotu declarando api que ira retornar a lista de pets
+//aqui estou declarando api que ira retornar a lista de pets
 //sera responsavel por cadastrar novos pets
 
 const API_URL='http://localhost:3000'

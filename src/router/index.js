@@ -27,6 +27,21 @@ const router = createRouter({
       name: 'edit',
       component: () => import('../views/PetEditView.vue'),
     },
+     {
+      path: '/tutores',
+      name: 'tutores',
+      component: () => import('../views/TutoresView.vue'),
+    },
+     {
+      path: '/tutores/novo',
+      name: 'addTutor',
+      component: () => import('../views/AddTutorView.vue'),
+    },
+     {
+      path: '/tutores/:id',
+      name: 'detailsTutor',
+      component: () => import('../views/TutorDetailsView.vue'),
+    },
   ],
 });
 
