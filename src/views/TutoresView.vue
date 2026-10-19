@@ -2,12 +2,20 @@
 import { onMounted, ref } from 'vue';
 
 const tutores = ref([]);
-
+const pets = ref([]);
 const API_URL='http://localhost:3000'
 async function carregarTutores(){
   const respostaTutor = await fetch(`${API_URL}/tutores`)
   tutores.value = await respostaTutor.json()
   return tutores
+}
+async function carregarPets(){
+  const respostaPets = await fetch(`${API_URL}/pets`)
+ pets.value = await respostaPets.json();
+}
+
+ function petsTutor(tutorId){
+  return pets.value.filter(pet => Number(pet.tutorId) === Number(tutorId))
 }
 
 async function excluirTutor(id){
@@ -19,7 +27,10 @@ await fetch(`${API_URL}/tutores/${id}`, {
  await carregarTutores()
 }
 }
-onMounted(carregarTutores)
+onMounted(()=> {
+  carregarTutores()
+  carregarPets()
+})
 </script>
 <template>
   <div >
@@ -42,6 +53,8 @@ onMounted(carregarTutores)
    <th>Id</th>
    <th>Nome</th>
    <th>Telefone</th>
+   <th>Pets(Quantidade)</th>
+   <th>Nome dos Pets</th>
    <th>Ações</th>
    </tr>
    </thead>
@@ -53,7 +66,10 @@ onMounted(carregarTutores)
           <td>{{ tutor.id }}</td>
           <td>{{ tutor.nome }}</td>
           <td>{{ tutor.telefone }}</td>
-
+           <td>{{ petsTutor(tutor.id).length}}</td>
+           <td>
+             {{ petsTutor(tutor.id).map(p => p.nome).join(', ')|| '-' }}
+           </td>
            <td>
              <button class="btn btn-danger" @click="excluirTutor(tutor.id)"> Excluir
              </button>
@@ -65,3 +81,4 @@ onMounted(carregarTutores)
   </table>
   </div>
 </template>
+

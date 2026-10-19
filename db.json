@@ -21,8 +21,7 @@
       "id": "1",
       "nome": "Safira",
       "especie": "Cachorro",
-      "tutorId": "1",
-      "tutor": "Maria"
+      "tutorId": "1"
     },
     {
       "id": "2",
