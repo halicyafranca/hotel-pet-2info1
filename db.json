@@ -14,6 +14,11 @@
       "id": "3",
       "nome": "Ana",
       "telefone": "479999100100"
+    },
+    {
+      "nome": "maria rosa frança",
+      "telefone": "47999990001",
+      "id": "u5NpvSoeULM"
     }
   ],
   "pets": [
@@ -34,6 +39,12 @@
       "nome": "Pandora",
       "especie": "Gato",
       "tutorId": "3"
+    },
+    {
+      "nome": "besters",
+      "especie": "Gato",
+      "tutorId": "u5NpvSoeULM",
+      "id": "9A-Tl5bt7WE"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -15,7 +15,7 @@ async function carregarPets(){
 }
 
  function petsTutor(tutorId){
-  return pets.value.filter(pet => Number(pet.tutorId) === Number(tutorId))
+  return pets.value.filter(pet => pet.tutorId === tutorId)
 }
 
 async function excluirTutor(id){
